@@ -21,7 +21,7 @@ if not os.environ.get("OPENAI_API_KEY"):
     print("No OpenAI API key found")
     sys.exit(1)
 
-client = OpenAI()
+client = openai.OpenAI()
 
 model_engine = os.environ["MODEL"]
 commit_title = os.environ["COMMIT_TITLE"]
