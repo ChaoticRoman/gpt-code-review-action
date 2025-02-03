@@ -10,7 +10,7 @@ inputs:
   model:
     description: 'The OpenAI language model to use for code review'
     required: false
-    default: 'gpt-3.5-turbo'
+    default: 'o3-mini'
   openai-key:
     description: 'The OpenAI API key'
     required: true
