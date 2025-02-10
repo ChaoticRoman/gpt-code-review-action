@@ -38,7 +38,7 @@ if len(prompt) > max_length:
           f"sending only first {max_length} characters")
     prompt = prompt[:max_length]
 
-kwargs = {'model': model_engine}
+kwargs = {'model': model_engine, 'reasoning_effort': 'high'}
 kwargs['max_completion_tokens'] = 4096
 kwargs['messages'] = [
     {"role": "system",
