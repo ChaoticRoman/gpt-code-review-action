@@ -16,8 +16,7 @@ inputs:
   prompt:
     description: 'The prompt to use for the analysis.'
     required: false
-    default: |
-      Explain and review following patch:
+    default: 'Explain and review following patch:'
   post-if-error:
     description: 'Whether to post a comment if there was an error'
     required: false
