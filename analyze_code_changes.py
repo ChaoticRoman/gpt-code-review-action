@@ -32,14 +32,14 @@ max_length = int(os.environ["MAX_LENGTH"])
 code = sys.stdin.read()
 header = (f"Commit title is '{commit_title}'\n"
           f"and commit message is '{commit_message}'\n")
-prompt = os.environ["PROMPT"] + "\nCode of commit is:\n```\n" + code + "\n```"
+prompt = os.environ["PROMPT"] + "\n\n" + code
 if len(prompt) > max_length:
     print(f"Prompt too long for OpenAI: {len(prompt)} characters, "
           f"sending only first {max_length} characters")
     prompt = prompt[:max_length]
 
-kwargs = {'model': model_engine, 'reasoning_effort': 'high'}
-kwargs['max_completion_tokens'] = 4096
+kwargs = {'model': model_engine, 'reasoning_effort': 'xhigh'}
+kwargs['max_completion_tokens'] = 10000
 kwargs['messages'] = [
     {"role": "system",
      "content": "You are a helpful assistant and code reviewer."},
