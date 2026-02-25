@@ -23,7 +23,7 @@ jobs:
       - uses: sshnaidm/gpt-code-review-action@v2.0
         with:
           openai-key: ${{ secrets.OPENAI_API_KEY }}
-          # model: 'gpt-5.2'
+          # model: 'gpt-5.3-codex'
           # max-length: 20000
           # prompt: 'Only suggest performance improvements for this code.'
           # post-if-error: true
@@ -40,7 +40,7 @@ To post comments in Pull Requests, the job requires additional permissions: `pul
 
 `github-token`: The token used to authenticate with the GitHub API (optional, will take a default `${{ github.token }}`).
 
-`model`: The OpenAI language model to use for code review (optional, with a default `gpt-5.12`).
+`model`: The OpenAI language model to use for code review (optional, with a default `gpt-5.3-codex`).
 
 `openai-key`: The OpenAI API key used for authentication (**required**).
 

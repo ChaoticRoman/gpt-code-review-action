@@ -38,20 +38,16 @@ if len(prompt) > max_length:
           f"sending only first {max_length} characters")
     prompt = prompt[:max_length]
 
-kwargs = {'model': model_engine, 'reasoning_effort': 'xhigh'}
-kwargs['max_completion_tokens'] = 10000
-kwargs['messages'] = [
-    {"role": "system",
-     "content": "You are a helpful assistant and code reviewer."},
-    {"role": "assistant", "content": "You are code reviewer for a project."},
-    {"role": "user", "content": prompt},
-]
+kwargs = {'model': model_engine, 'reasoning': {'effort': 'xhigh'}}
+kwargs['max_output_tokens'] = 10000
+kwargs['instructions'] = "You are a helpful assistant and code reviewer. You are code reviewer for a project."
+kwargs['input'] = prompt
 try:
-    response = client.chat.completions.create(**kwargs)
-    if response.choices:
-        review_text = response.choices[0].message.content.strip()
+    response = client.responses.create(**kwargs)
+    if response.output_text:
+        review_text = response.output_text.strip()
     else:
-        review_text = f"No correct answer from OpenAI!\n{response.text}"
+        review_text = "No correct answer from OpenAI!"
 except Exception as e:
     review_text = f"OpenAI failed to generate a review: {e}"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export OPENAI_API_KEY=${OPENAI_API_KEY:-$(cat .api_key)}
-export MODEL=o3-mini
+export MODEL=gpt-5.3-codex
 export COMMIT_TITLE=test
 export COMMIT_BODY=test
 export MAX_LENGTH=256
