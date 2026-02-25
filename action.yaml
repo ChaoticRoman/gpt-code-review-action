@@ -9,7 +9,7 @@ inputs:
   model:
     description: 'The OpenAI language model to use for code review'
     required: false
-    default: 'gpt-5.2'
+    default: 'gpt-5.3-codex'
   openai-key:
     description: 'The OpenAI API key'
     required: true
