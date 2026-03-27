@@ -39,16 +39,10 @@ if len(prompt) > max_length:
     prompt = prompt[:max_length]
 
 kwargs = {'model': model_engine, 'reasoning': {'effort': 'xhigh'}}
-kwargs['max_output_tokens'] = 10000
+kwargs['max_output_tokens'] = 50000
 kwargs['instructions'] = "You are a helpful assistant and code reviewer. You are code reviewer for a project."
 kwargs['input'] = prompt
-try:
-    response = client.responses.create(**kwargs)
-    if response.output_text:
-        review_text = response.output_text.strip()
-    else:
-        review_text = "No correct answer from OpenAI!"
-except Exception as e:
-    review_text = f"OpenAI failed to generate a review: {e}"
-
-print(f"{review_text}")
+response = client.responses.create(**kwargs)
+if not response.output_text:
+    raise RuntimeError("Empty response from OpenAI")
+print(response.output_text.strip())
