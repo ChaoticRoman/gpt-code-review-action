@@ -1,10 +1,14 @@
 # OpenAI Code Review Action
 
-This action uses the OpenAI GPT-3 language model to review code changes in a pull request.
+This action uses the OpenAI API to review code changes in a pull request.
+
+Fork of [sshnaidm/gpt-code-review-action](https://github.com/sshnaidm/gpt-code-review-action).
 
 ## Usage
 
 To use this action, include it as a step in your workflow, after the checkout step.
+
+The commented-out inputs below show their default values.
 
 ```yaml
 
@@ -20,35 +24,35 @@ jobs:
       # This step checks out a copy of your repository.
       - uses: actions/checkout@v3
       # This step references the directory that contains the action.
-      - uses: sshnaidm/gpt-code-review-action@v2.0
+      - uses: ChaoticRoman/gpt-code-review-action@v13
         with:
           openai-key: ${{ secrets.OPENAI_API_KEY }}
-          # model: 'gpt-5.3-codex'
+          # model: 'gpt-5.2-codex'
           # max-length: 20000
-          # prompt: 'Only suggest performance improvements for this code.'
+          # prompt: 'Explain and review following patch:'
           # post-if-error: true
 
 ```
 
 The action will post the OpenAI review as a comment on the pull request.
 
-### Requierements
+### Requirements
 
 To post comments in Pull Requests, the job requires additional permissions: `pull-requests: write`. However, since this permission implies "explicit deny," we also need to mention the default permission `contents: read`.
 
 ### Inputs
 
-`github-token`: The token used to authenticate with the GitHub API (optional, will take a default `${{ github.token }}`).
-
-`model`: The OpenAI language model to use for code review (optional, with a default `gpt-5.3-codex`).
-
 `openai-key`: The OpenAI API key used for authentication (**required**).
 
-`prompt`: The prompt to use for the analysis (optional, with a default value).
+`model`: The OpenAI language model to use for code review (optional, defaults to `gpt-5.2-codex`).
 
-`max-length`: The diff that is send to OpenAI for review is cut off after 4000 characters by default. With this paramter you can adjust this limit.
+`prompt`: The prompt to use for the analysis (optional, defaults to `'Explain and review following patch:'`).
 
-`post-if-error`: Whether to post a comment if there was an error (optional, with a default `true`).
+`max-length`: The maximum number of characters of the diff to submit to OpenAI (optional, defaults to `20000`).
+
+`post-if-error`: Whether to post a comment if there was an error (optional, defaults to `true`).
+
+`github-token`: The token used to authenticate with the GitHub API (optional, defaults to `${{ github.token }}`).
 
 ## Contributing
 
